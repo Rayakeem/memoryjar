@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:memory_jar/core/theme/app_theme.dart';
-import 'package:memory_jar/features/jellyfish/jellyfish_home_page.dart';
+import 'package:memory_jar/core/theme/app_colors.dart';
+import 'package:memory_jar/features/splash/splash_page.dart';
+import 'package:memory_jar/features/onboarding/onboarding_page.dart';
+import 'package:memory_jar/features/auth/login_page.dart';
+import 'package:memory_jar/features/home/home_page.dart';
+import 'package:memory_jar/features/memory/write_memory_page.dart';
 
 /// Main App Widget
 class MemoryJarApp extends ConsumerWidget {
@@ -12,8 +16,24 @@ class MemoryJarApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Memory Jar',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      home: const JellyfishHomePage(),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.light(
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+          surface: AppColors.card,
+          error: AppColors.destructive,
+        ),
+        scaffoldBackgroundColor: AppColors.background,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashPage(),
+        '/onboarding': (context) => const OnboardingPage(),
+        '/login': (context) => const LoginPage(),
+        '/home': (context) => const HomePage(),
+        '/write-memory': (context) => const WriteMemoryPage(),
+      },
     );
   }
 }
